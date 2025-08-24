@@ -3,6 +3,7 @@ import 'dart:ui' show ImageFilter;
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:portfolio_site/pages/blog_page.dart';
+import 'package:portfolio_site/pages/post_page.dart';
 import 'package:portfolio_site/pages/components_page.dart';
 import 'package:portfolio_site/sections/home_page.dart';
 
@@ -46,6 +47,13 @@ GoRouter createRouter() {
       GoRoute(
         path: '/blog',
         pageBuilder: (context, state) => _fadeBlurPage(const BlogPage()),
+      ),
+      GoRoute(
+        path: '/blog/:slug',
+        pageBuilder: (context, state) {
+          final slug = state.pathParameters['slug']!;
+          return _fadeBlurPage(PostPage(slug: slug));
+        },
       ),
       GoRoute(
         path: '/components',

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio_site/theme/app_colors.dart';
+import 'package:portfolio_site/widgets/appear_on_scroll.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../core/responsive.dart';
@@ -12,42 +13,44 @@ class ContactSection extends StatelessWidget {
     final t = Theme.of(context);
     return Responsive(
       builder: (context, width) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'İletişim',
-              style: t.textTheme.headlineSmall?.copyWith(
-                fontWeight: FontWeight.w800,
+        return AppearOnScroll(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'İletişim',
+                style: t.textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.w800,
+                ),
               ),
-            ),
-            const SizedBox(height: 12),
-            Wrap(
-              spacing: 12,
-              children: [
-                _LinkButton(
-                  icon: Icons.email,
-                  label: 'E-posta',
-                  onTap: () => _open('mailto:you@mail.com'),
-                ),
-                _LinkButton(
-                  icon: Icons.link,
-                  label: 'LinkedIn',
-                  onTap: () => _open('https://linkedin.com/in/your'),
-                ),
-                _LinkButton(
-                  icon: Icons.code,
-                  label: 'GitHub',
-                  onTap: () => _open('https://github.com/yourname'),
-                ),
-                _LinkButton(
-                  icon: Icons.forum,
-                  label: 'Twitter / X',
-                  onTap: () => _open('https://x.com/your'),
-                ),
-              ],
-            ),
-          ],
+              const SizedBox(height: 12),
+              Wrap(
+                spacing: 12,
+                children: [
+                  _LinkButton(
+                    icon: Icons.email,
+                    label: 'E-posta',
+                    onTap: () => _open('mailto:you@mail.com'),
+                  ),
+                  _LinkButton(
+                    icon: Icons.link,
+                    label: 'LinkedIn',
+                    onTap: () => _open('https://linkedin.com/in/your'),
+                  ),
+                  _LinkButton(
+                    icon: Icons.code,
+                    label: 'GitHub',
+                    onTap: () => _open('https://github.com/yourname'),
+                  ),
+                  _LinkButton(
+                    icon: Icons.forum,
+                    label: 'Twitter / X',
+                    onTap: () => _open('https://x.com/your'),
+                  ),
+                ],
+              ),
+            ],
+          ),
         );
       },
     );

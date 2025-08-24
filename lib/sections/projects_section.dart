@@ -3,7 +3,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../core/responsive.dart';
 import '../data/projects.dart';
-import '../widgets/animated_on_build.dart';
+import '../widgets/appear_on_scroll.dart'; // ⬅️ yeni
 import '../widgets/hover_card.dart';
 
 class ProjectsSection extends StatelessWidget {
@@ -17,12 +17,16 @@ class ProjectsSection extends StatelessWidget {
         final isNarrow = width < 720;
         final cross = isNarrow ? 1 : 3;
         return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Projeler',
-              style: t.textTheme.headlineMedium?.copyWith(
-                fontWeight: FontWeight.w800,
+            // İstersen başlığı da animasyonla getir:
+            AppearOnScroll(
+              offsetY: 12,
+              duration: const Duration(milliseconds: 420),
+              child: Text(
+                'Projeler',
+                style: t.textTheme.headlineMedium?.copyWith(
+                  fontWeight: FontWeight.w800,
+                ),
               ),
             ),
             const SizedBox(height: 16),
@@ -38,8 +42,12 @@ class ProjectsSection extends StatelessWidget {
               itemCount: demoProjects.length,
               itemBuilder: (context, i) {
                 final p = demoProjects[i];
-                return AnimatedOnBuild(
-                  delay: Duration(milliseconds: 100 + 80 * i),
+                return AppearOnScroll(
+                  key: ValueKey('project-$i'), // stabilize
+                  offsetY: 20, // alttan gelsin
+                  duration: Duration(
+                    milliseconds: 420 + i * 60,
+                  ), // hafif stagger
                   child: HoverCard(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -89,7 +97,8 @@ class ProjectsSection extends StatelessWidget {
 
   Future<void> _open(String url) async {
     final uri = Uri.parse(url);
-    if (await canLaunchUrl(uri))
+    if (await canLaunchUrl(uri)) {
       launchUrl(uri, mode: LaunchMode.externalApplication);
+    }
   }
 }

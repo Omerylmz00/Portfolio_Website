@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:portfolio_site/sections/skills_grid_section.dart';
+import 'package:provider/provider.dart';
 
 import '../core/responsive.dart';
 import '../core/section_keys.dart';
+import '../theme/theme_controller.dart';
 import 'about_section.dart';
 import 'contact_section.dart';
 import 'footer.dart';
@@ -55,6 +58,56 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(height: 32),
               Responsive(builder: (context, _) => const Divider(height: 1)),
               const SizedBox(height: 32),
+              /*Responsive(
+                builder: (_, __) => SkillsSection(
+                  items: const [
+                    'Flutter',
+                    'Dart',
+                    'Swift',
+                    'SwiftUI',
+                    'Firebase',
+                    'Node.js',
+                    'Express',
+                    'PostgreSQL',
+                    'MongoDB',
+                    'TensorFlow',
+                    'PyTorch',
+                    'AI/ML',
+                    'REST',
+                    'GraphQL',
+                    'Clean Architecture',
+                    'TDD',
+                    'CI/CD',
+                  ],
+                  speed: 36,
+                  gap: 12,
+                  height: 40,
+                ),
+              ),*/
+              const SkillsGridSection(
+                skills: [
+                  'Flutter',
+                  'Dart',
+                  'Swift',
+                  'SwiftUI',
+                  'Firebase',
+                  'Node.js',
+                  'Express',
+                  'PostgreSQL',
+                  'MongoDB',
+                  'TensorFlow',
+                  'PyTorch',
+                  'AI/ML',
+                  'REST',
+                  'GraphQL',
+                  'Clean Architecture',
+                  'TDD',
+                  'CI/CD',
+                ],
+              ),
+              const SizedBox(height: 32),
+              Responsive(builder: (context, _) => const Divider(height: 1)),
+              const SizedBox(height: 50),
               KeyedSubtree(
                 key: keys.projectsKey,
                 child: const ProjectsSection(),
@@ -102,6 +155,15 @@ class _TopNav extends StatelessWidget implements PreferredSizeWidget {
         TextButton(onPressed: onProjects, child: const Text('Projeler')),
         TextButton(onPressed: onAbout, child: const Text('Hakkımda')),
         TextButton(onPressed: onContact, child: const Text('İletişim')),
+        IconButton(
+          tooltip: 'Theme',
+          onPressed: () => context.read<ThemeController>().toggle(),
+          icon: Icon(
+            Theme.of(context).brightness == Brightness.dark
+                ? Icons.wb_sunny
+                : Icons.dark_mode,
+          ),
+        ),
         const SizedBox(width: 12),
         FilledButton.tonal(
           onPressed: () => context.go('/blog'),

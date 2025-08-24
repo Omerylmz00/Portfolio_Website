@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio_site/sections/timeline_section.dart';
+import 'package:portfolio_site/widgets/appear_on_scroll.dart';
 
 import '../core/responsive.dart';
 import '../widgets/animated_on_build.dart';
@@ -13,7 +15,7 @@ class AboutSection extends StatelessWidget {
       builder: (context, width) {
         final isNarrow = width < 860;
         return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          //crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               'Hakkımda',
@@ -22,27 +24,39 @@ class AboutSection extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 12),
-            AnimatedOnBuild(
+            AppearOnScroll(
               child: Text(
                 "Üniversite son sınıf öğrencisiyim. Flutter, Swift, Backend ve AI/ML alanlarına ilgi duyuyorum.\n"
                 "Amacım kullanıcı odaklı ürünler geliştirmek ve bildiklerimi toplulukla paylaşmak.",
                 style: t.textTheme.bodyLarge,
               ),
             ),
-            const SizedBox(height: 18),
-            Wrap(
-              spacing: 12,
-              runSpacing: 12,
-              children: const [
-                _Skill('Flutter'),
-                _Skill('Swift'),
-                _Skill('Node.js'),
-                _Skill('Dart'),
-                _Skill('Python'),
-                _Skill('TensorFlow'),
-              ],
+            const SizedBox(height: 32),
+            Divider(height: 1),
+            const SizedBox(height: 32),
+            AppearOnScroll(
+              child: const TimelineSection(
+                items: [
+                  TimelineItem(
+                    date: '2021–2023',
+                    title: 'Bilgisayar Müh.',
+                    desc: 'Özet...',
+                  ),
+                  TimelineItem(
+                    date: '2024',
+                    title: 'Staj / Part-time',
+                    desc: 'Özet...',
+                  ),
+                  TimelineItem(
+                    date: '2025',
+                    title: 'Flutter + Swift + Backend',
+                    desc: 'Özet...',
+                  ),
+                ],
+              ),
             ),
             const SizedBox(height: 18),
+
             if (!isNarrow)
               Row(
                 children: const [
@@ -90,21 +104,6 @@ class AboutSection extends StatelessWidget {
           ],
         );
       },
-    );
-  }
-}
-
-class _Skill extends StatelessWidget {
-  final String text;
-  const _Skill(this.text);
-
-  @override
-  Widget build(BuildContext context) {
-    final t = Theme.of(context);
-    return Chip(
-      label: Text(text),
-      side: BorderSide(color: t.colorScheme.outline.withOpacity(.2)),
-      backgroundColor: t.colorScheme.surface,
     );
   }
 }
