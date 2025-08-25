@@ -14,12 +14,12 @@ class SkillsGridSection extends StatelessWidget {
       builder: (_, __) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          /*Text(
             'Kullandığım Teknolojiler',
             style: t.textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.w700,
             ),
-          ),
+          ),*/
           const SizedBox(height: 12),
           Wrap(
             spacing: 12,

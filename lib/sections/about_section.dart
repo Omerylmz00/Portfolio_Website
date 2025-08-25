@@ -10,12 +10,13 @@ class AboutSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DateTime ym(int year, int month) => DateTime(year, month);
     final t = Theme.of(context);
     return Responsive(
       builder: (context, width) {
         final isNarrow = width < 860;
         return Column(
-          //crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               'Hakkımda',
@@ -26,7 +27,7 @@ class AboutSection extends StatelessWidget {
             const SizedBox(height: 12),
             AppearOnScroll(
               child: Text(
-                "Üniversite son sınıf öğrencisiyim. Flutter, Swift, Backend ve AI/ML alanlarına ilgi duyuyorum.\n"
+                "Merhaba, ben Ömer Faruk Yılmaz. Süleyman Demirel Üniversitesi'nde 4. sınıf öğrencisiyim.\n"
                 "Amacım kullanıcı odaklı ürünler geliştirmek ve bildiklerimi toplulukla paylaşmak.",
                 style: t.textTheme.bodyLarge,
               ),
@@ -35,22 +36,37 @@ class AboutSection extends StatelessWidget {
             Divider(height: 1),
             const SizedBox(height: 32),
             AppearOnScroll(
-              child: const TimelineSection(
+              child: TimelineSection(
                 items: [
                   TimelineItem(
-                    date: '2021–2023',
-                    title: 'Bilgisayar Müh.',
-                    desc: 'Özet...',
+                    start: ym(2022, 9),
+                    end: null,
+                    title: 'Bilgisayar Mühendisliği',
+                    desc:
+                        'Süleyman Demirel Üniversitesi\'nde Bilgisayar Mühendisliği bölümünde lisans eğitimime devam ediyorum. ',
                   ),
                   TimelineItem(
-                    date: '2024',
-                    title: 'Staj / Part-time',
-                    desc: 'Özet...',
+                    start: ym(2023, 11),
+                    end: ym(2024, 6),
+                    title: 'Google Oyun ve Uygulama Akademisi',
+                    desc:
+                        'Yeni adıyla Yapay Zeka ve Teknoloji Akademisi, eski adıyla Oyun ve Uygulama Akademisi\'nde Flutter alanında eğitim aldım. Flutter\'la ilk kez burada tanıştım. Ayrıca burada girişimciler için eğitim, hukuk, finans gibi alanlarda eğitimler aldım. Akademiyi geçirdiğim bir trafik kazasından dolayı yüzde 50 olarak tamamlayabildim.',
                   ),
                   TimelineItem(
-                    date: '2025',
-                    title: 'Flutter + Swift + Backend',
-                    desc: 'Özet...',
+                    date: 'Eylül 2024 - Haziran 2025',
+                    start: ym(2024, 9),
+                    end: ym(2025, 6),
+                    title:
+                        'GDG on Campus SDU - Core Team Üyesi & Teknoloji Takımı',
+                    desc:
+                        'Google Developer Groups\'un üniversite kampüslerindeki topluluk girişimi olan GDG on Campus\'un Süleyman Demirel Üniversitesi\'nde yer alan topluluğunda core team üyeliği yaptım. Teknoloji takımının Flutter alanında takım liderliğini yaptım. Ayrıca etkinlik organizasyonlarında görev aldım. Bunlarla birlikte topluluğumuz için Flutter alanında videolar çektim.',
+                  ),
+                  TimelineItem(
+                    title: 'STING - TÜBİTAK 1001 Projesi',
+                    desc:
+                        'Okulumuzun ve akademisyenlerimizin yürüttüğü TÜBİTAK 1001 projesinde yazılım geliştirici ve lisans öğrenci araştırmacı olarak görev alıyorum. Proje hakkında detaylı bilgi için projeler kısmına bakabilirsiniz.',
+                    start: ym(2025, 2),
+                    end: null,
                   ),
                 ],
               ),

@@ -30,17 +30,18 @@ class ContactSection extends StatelessWidget {
                   _LinkButton(
                     icon: Icons.email,
                     label: 'E-posta',
-                    onTap: () => _open('mailto:you@mail.com'),
+                    onTap: () => _open('mailto:omrf.ylmz00@gmail.com'),
                   ),
                   _LinkButton(
                     icon: Icons.link,
                     label: 'LinkedIn',
-                    onTap: () => _open('https://linkedin.com/in/your'),
+                    onTap: () =>
+                        _open('https://www.linkedin.com/in/omrfylmz00/'),
                   ),
                   _LinkButton(
                     icon: Icons.code,
                     label: 'GitHub',
-                    onTap: () => _open('https://github.com/yourname'),
+                    onTap: () => _open('https://github.com/Omerylmz00'),
                   ),
                   _LinkButton(
                     icon: Icons.forum,

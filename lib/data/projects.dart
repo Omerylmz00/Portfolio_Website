@@ -16,23 +16,23 @@ class Project {
 
 final demoProjects = <Project>[
   Project(
-    title: 'AI Notes',
+    title: 'Stayzi - Airbnb Clone',
     description:
-        'Flutter + Firebase ile not uygulaması. Basit text classification demo içerir.',
+        'Flutter ve FastAPI kullanarak geliştirilmiş Airbnb benzeri uygulama.',
     liveUrl: null,
-    repoUrl: 'https://github.com/yourname/ai-notes',
-    tags: ['Flutter', 'Firebase', 'AI/ML'],
+    repoUrl: 'https://github.com/Omerylmz00/Stayzi',
+    tags: ['Flutter', 'FastAPI', 'PostgreSQL'],
   ),
   Project(
-    title: 'Swift Weather',
-    description: 'iOS için SwiftUI ile hava durumu uygulaması.',
-    repoUrl: 'https://github.com/yourname/swift-weather',
-    tags: ['Swift', 'iOS'],
+    title: 'STING - TÜBİTAK 1001 Projesi',
+    description:
+        'Çocukluk çağı akut lösemisi için dijital ikiz yaklaşımı ve derin öğrenme ile ilaç yeniden konumlandırma karar destek sistemi geliştirmeyi amaçlayan bir TÜBİTAK 1001 projesidir. ',
+    repoUrl: 'https://github.com/tubitaksting',
   ),
   Project(
     title: 'Portfolio (bu site)',
     description: 'Flutter Web ile kişisel portfolyo.',
-    repoUrl: 'https://github.com/yourname/my_portfolio',
+    repoUrl: 'https://github.com/Omerylmz00/Portfolio_Website',
     tags: ['Flutter Web'],
   ),
 ];

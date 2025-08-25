@@ -3,7 +3,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../core/responsive.dart';
 import '../data/projects.dart';
-import '../widgets/appear_on_scroll.dart'; // ⬅️ yeni
+import '../widgets/appear_on_scroll.dart';
 import '../widgets/hover_card.dart';
 
 class ProjectsSection extends StatelessWidget {
@@ -17,8 +17,8 @@ class ProjectsSection extends StatelessWidget {
         final isNarrow = width < 720;
         final cross = isNarrow ? 1 : 3;
         return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // İstersen başlığı da animasyonla getir:
             AppearOnScroll(
               offsetY: 12,
               duration: const Duration(milliseconds: 420),

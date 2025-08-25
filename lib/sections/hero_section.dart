@@ -7,15 +7,29 @@ import '../core/responsive.dart';
 import '../widgets/animated_circle_avatar.dart';
 import '../widgets/primary_button.dart';
 
+const cvFileId = '1l-TcWEo8T0r62GpZ2iDforbf_RfqhvrK';
+const cvViewUrl = 'https://drive.google.com/file/d/$cvFileId/view?usp=sharing';
+const cvDownloadUrl =
+    'https://drive.google.com/uc?export=download&id=$cvFileId';
+
 class HeroSection extends StatelessWidget {
   const HeroSection({super.key});
 
   @override
   Widget build(BuildContext context) {
     final t = Theme.of(context);
-    return Container(
+    final isDark = t.brightness == Brightness.dark;
+
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 600),
+      curve: Curves.easeInOut,
+
       height: 520,
-      decoration: const BoxDecoration(gradient: AppGradients.hero),
+      decoration: BoxDecoration(
+        gradient: AppGradients.heroFor(
+          isDark ? Brightness.dark : Brightness.light,
+        ),
+      ),
       child: Stack(
         children: [
           Responsive(
@@ -64,16 +78,24 @@ class HeroSection extends StatelessWidget {
                                 const SizedBox(width: 12),
                                 PrimaryButton(
                                   outlined: true,
-                                  label: 'CV İndir',
+                                  label: 'CV’yi Görüntüle',
                                   onPressed: () async {
-                                    final uri = Uri.parse(
-                                      'https://your-cv-link.com',
+                                    final uri = Uri.parse(cvViewUrl);
+                                    final ok = await launchUrl(
+                                      uri,
+                                      mode: LaunchMode.externalApplication,
+                                      webOnlyWindowName:
+                                          '_blank', // web’de yeni sekme
                                     );
-                                    if (await canLaunchUrl(uri))
-                                      launchUrl(
-                                        uri,
-                                        mode: LaunchMode.externalApplication,
+                                    if (!ok && context.mounted) {
+                                      ScaffoldMessenger.of(
+                                        context,
+                                      ).showSnackBar(
+                                        const SnackBar(
+                                          content: Text('CV açılamadı.'),
+                                        ),
                                       );
+                                    }
                                   },
                                 ),
                               ],

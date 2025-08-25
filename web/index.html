@@ -1,38 +1,74 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
   <base href="$FLUTTER_BASE_HREF">
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="description" content="A new Flutter project.">
 
-  <!-- iOS meta tags & icons -->
+  <!-- iOS/PWA -->
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="portfolio_site">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
-  <!-- Favicon -->
+  <!-- Favicon & manifest -->
   <link rel="icon" type="image/png" href="favicon.png"/>
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Adres çubuğu/sistem rengi -->
+  <meta name="theme-color" content="#0d0d0d" />
 
   <title>portfolio_site</title>
-  <link rel="manifest" href="manifest.json">
+
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      background: radial-gradient(60% 50% at 50% 40%, #42515e 0%, #0d0d0d 70%);
+    }
+
+    /* Flutter’ın varsayılan mavi barını ve loader’ını gizle */
+    flutter-loader, .loading-indicator, .loading-bar { display: none !important; }
+
+    /* Özel splash overlay */
+    #splash {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(60% 50% at 50% 40%, #42515e 0%, #0d0d0d 70%);
+    }
+    #splash .logo {
+      font: 600 18px/1.2 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial;
+      letter-spacing: .4px;
+      color: #c9b885; /* ecru */
+      opacity: .95;
+    }
+    #splash.fade-out { opacity: 0; transition: opacity .30s ease; }
+  </style>
 </head>
 <body>
+
+  <!-- Özel splash -->
+  <div id="splash">
+    <div class="logo">Loading portfolio…</div>
+  </div>
+
+  <!-- İlk Flutter frame gelince splash'i kaldır -->
+  <script>
+    window.addEventListener('flutter-first-frame', function () {
+      const el = document.getElementById('splash');
+      if (!el) return;
+      el.classList.add('fade-out');
+      setTimeout(() => el.remove(), 320);
+    });
+  </script>
+
+  <!-- Flutter bootstrap -->
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>
