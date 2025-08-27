@@ -7,58 +7,111 @@
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="description" content="A new Flutter project.">
 
-  <!-- iOS/PWA -->
+
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="portfolio_site">
+  <meta name="apple-mobile-web-app-title" content="ÖFY Portfolio">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
-  <!-- Favicon & manifest -->
+
   <link rel="icon" type="image/png" href="favicon.png"/>
   <link rel="manifest" href="manifest.json">
 
-  <!-- Adres çubuğu/sistem rengi -->
+
   <meta name="theme-color" content="#0d0d0d" />
 
   <title>portfolio_site</title>
 
   <style>
+    :root{
+      --bg-dark: #0d0d0d;
+      --bg-ring: #42515e;     
+      --accent:  #c9b885;       
+      --ring-size: 120% 120%;  
+    }
+
     html, body {
       margin: 0;
       height: 100%;
-      background: radial-gradient(60% 50% at 50% 40%, #42515e 0%, #0d0d0d 70%);
+      background: var(--bg-dark);
+      background-image: radial-gradient(var(--ring-size) at 50% 50%, var(--bg-ring) 0%, var(--bg-dark) 65%);
+      background-attachment: fixed;
     }
 
-    /* Flutter’ın varsayılan mavi barını ve loader’ını gizle */
+    
     flutter-loader, .loading-indicator, .loading-bar { display: none !important; }
 
-    /* Özel splash overlay */
     #splash {
       position: fixed;
       inset: 0;
       z-index: 99999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: radial-gradient(60% 50% at 50% 40%, #42515e 0%, #0d0d0d 70%);
+      display: grid;
+      place-items: center;
+      background: var(--bg-dark);
+      background-image: radial-gradient(var(--ring-size) at 50% 50%, var(--bg-ring) 0%, var(--bg-dark) 65%);
     }
+
+    #splash .box{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      border-radius: 14px;
+      background: rgba(0,0,0,.18);
+      box-shadow: 0 6px 30px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.05);
+      backdrop-filter: blur(6px);
+    }
+
     #splash .logo {
       font: 600 18px/1.2 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial;
       letter-spacing: .4px;
-      color: #c9b885; /* ecru */
+      color: var(--accent);
       opacity: .95;
+      text-align: center;
+      white-space: nowrap;
     }
+
+    
+    .progress {
+      width: min(420px, 60vw);
+      height: 8px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(255,255,255,.08);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.06), 0 2px 10px rgba(0,0,0,.25);
+    }
+    .progress__bar {
+      height: 100%;
+      width: 40%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #d7c892 0%, #bcae72 50%, #d7c892 100%);
+      animation: indeterminate 1.2s ease-in-out infinite;
+      will-change: transform;
+      box-shadow: 0 2px 8px rgba(0,0,0,.25);
+    }
+    @keyframes indeterminate {
+      0%   { transform: translateX(-100%); }
+      50%  { transform: translateX(15%); }
+      100% { transform: translateX(100%); }
+    }
+
+ 
     #splash.fade-out { opacity: 0; transition: opacity .30s ease; }
   </style>
 </head>
 <body>
 
-  <!-- Özel splash -->
-  <div id="splash">
-    <div class="logo">Loading portfolio…</div>
+  
+  <div id="splash" role="status" aria-live="polite">
+    <div class="box">
+      <div class="logo">Loading portfolio</div>
+      <div class="progress" aria-hidden="false" aria-label="Loading">
+        <div class="progress__bar"></div>
+      </div>
+    </div>
   </div>
 
-  <!-- İlk Flutter frame gelince splash'i kaldır -->
   <script>
     window.addEventListener('flutter-first-frame', function () {
       const el = document.getElementById('splash');
@@ -68,7 +121,7 @@
     });
   </script>
 
-  <!-- Flutter bootstrap -->
+
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>

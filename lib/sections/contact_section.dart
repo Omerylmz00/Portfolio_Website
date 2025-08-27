@@ -11,46 +11,89 @@ class ContactSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final t = Theme.of(context);
+
     return Responsive(
       builder: (context, width) {
         return AppearOnScroll(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'İletişim',
-                style: t.textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.w800,
+          child: Center(
+            // içerik ortalansın
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(
+                maxWidth: 880,
+              ), // hoş bir satır genişliği
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  top: 36,
+                ), // başlığı biraz aşağı çek
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment:
+                      CrossAxisAlignment.center, // başlık + butonlar ortalı
+                  children: [
+                    Text(
+                      'İletişim',
+                      textAlign: TextAlign.center,
+                      style: t.textTheme.headlineMedium?.copyWith(
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+
+                    // (opsiyonel) kısa açıklama
+                    Text(
+                      "Birlikte çalışalım mı?\n"
+                      "Aşağıdaki linklerden bana ulaşabilir, görüşme planlayabilirsiniz.",
+                      textAlign: TextAlign.center,
+                      style: t.textTheme.bodyMedium?.copyWith(
+                        color: t.colorScheme.onSurface.withOpacity(.75),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    Wrap(
+                      alignment: WrapAlignment.center, // yatayda ortala
+                      runAlignment:
+                          WrapAlignment.center, // çok satıra düşerse de ortala
+                      spacing: 12,
+                      runSpacing: 12, // satırlar arası dikey boşluk
+                      children: [
+                        _LinkButton(
+                          icon: Icons.email,
+                          label: 'E-posta',
+                          // konu/ön yazı ile doldurulmuş mailto
+                          onTap: () => _open(
+                            'mailto:omrf.ylmz00@gmail.com'
+                            '?subject=Merhaba%20%C3%96mer%20Faruk'
+                            '&body=K%C4%B1saca%20konu:%20',
+                          ),
+                        ),
+                        _LinkButton(
+                          icon: Icons.link,
+                          label: 'LinkedIn',
+                          onTap: () =>
+                              _open('https://www.linkedin.com/in/omrfylmz00/'),
+                        ),
+                        _LinkButton(
+                          icon: Icons.code,
+                          label: 'GitHub',
+                          onTap: () => _open('https://github.com/Omerylmz00'),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        const SizedBox(height: 12),
+                        _LinkButton(
+                          icon: Icons.event_available,
+                          label: 'Görüşme Planla',
+                          onTap: () =>
+                              _open('https://cal.com/omeryilmaz00/15min'),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(height: 12),
-              Wrap(
-                spacing: 12,
-                children: [
-                  _LinkButton(
-                    icon: Icons.email,
-                    label: 'E-posta',
-                    onTap: () => _open('mailto:omrf.ylmz00@gmail.com'),
-                  ),
-                  _LinkButton(
-                    icon: Icons.link,
-                    label: 'LinkedIn',
-                    onTap: () =>
-                        _open('https://www.linkedin.com/in/omrfylmz00/'),
-                  ),
-                  _LinkButton(
-                    icon: Icons.code,
-                    label: 'GitHub',
-                    onTap: () => _open('https://github.com/Omerylmz00'),
-                  ),
-                  _LinkButton(
-                    icon: Icons.forum,
-                    label: 'Twitter / X',
-                    onTap: () => _open('https://x.com/your'),
-                  ),
-                ],
-              ),
-            ],
+            ),
           ),
         );
       },
@@ -59,8 +102,9 @@ class ContactSection extends StatelessWidget {
 
   Future<void> _open(String url) async {
     final uri = Uri.parse(url);
-    if (await canLaunchUrl(uri))
+    if (await canLaunchUrl(uri)) {
       launchUrl(uri, mode: LaunchMode.externalApplication);
+    }
   }
 }
 
@@ -81,13 +125,11 @@ class _LinkButton extends StatefulWidget {
 
 class _LinkButtonState extends State<_LinkButton> {
   bool _hovering = false;
-
   static const _radius = 12.0;
 
   @override
   Widget build(BuildContext context) {
     final t = Theme.of(context);
-    final borderThickness = _hovering ? 2.0 : 1.2;
 
     return MouseRegion(
       onEnter: (_) => setState(() => _hovering = true),
@@ -95,9 +137,14 @@ class _LinkButtonState extends State<_LinkButton> {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 160),
         curve: Curves.easeOut,
-        padding: EdgeInsets.all(borderThickness),
+
+        // ✨ BOYUT SABİT: padding ve stroke hep aynı
+        padding: const EdgeInsets.all(2.0),
+        constraints: const BoxConstraints(minHeight: 44, minWidth: 120),
+
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(_radius + 2),
+          // Hover’da SADECE görünüm değişiyor, boyut değil
           gradient: _hovering
               ? const LinearGradient(
                   begin: Alignment.topLeft,
@@ -133,6 +180,7 @@ class _LinkButtonState extends State<_LinkButton> {
             borderRadius: BorderRadius.circular(_radius),
             onTap: widget.onTap,
             child: Padding(
+              // İç boşluk sabit kalsın
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
               child: Row(
                 mainAxisSize: MainAxisSize.min,

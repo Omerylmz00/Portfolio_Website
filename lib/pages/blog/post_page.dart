@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import '../data/post_repository.dart';
+
+import '../../data/post_repository.dart';
 
 class PostPage extends StatefulWidget {
   final String slug;
@@ -23,9 +24,18 @@ class _PostPageState extends State<PostPage> {
 
   Future<void> _load() async {
     final meta = await repo.findBySlug(widget.slug);
-    if (meta == null) { setState(() { md = '# 404\nYazı bulunamadı.'; title = '404'; }); return; }
+    if (meta == null) {
+      setState(() {
+        md = '# 404\nYazı bulunamadı.';
+        title = '404';
+      });
+      return;
+    }
     final content = await repo.loadMarkdown(meta.file);
-    setState(() { md = content; title = meta.title; });
+    setState(() {
+      md = content;
+      title = meta.title;
+    });
   }
 
   @override
@@ -39,10 +49,14 @@ class _PostPageState extends State<PostPage> {
               data: md!,
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               styleSheet: MarkdownStyleSheet.fromTheme(t).copyWith(
-                h1: t.textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w800),
+                h1: t.textTheme.headlineMedium?.copyWith(
+                  fontWeight: FontWeight.w800,
+                ),
                 p: t.textTheme.bodyLarge,
                 blockquoteDecoration: BoxDecoration(
-                  border: Border(left: BorderSide(color: t.colorScheme.primary, width: 3)),
+                  border: Border(
+                    left: BorderSide(color: t.colorScheme.primary, width: 3),
+                  ),
                 ),
               ),
             ),

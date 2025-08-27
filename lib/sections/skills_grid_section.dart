@@ -9,7 +9,6 @@ class SkillsGridSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final t = Theme.of(context);
     return Responsive(
       builder: (_, __) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,

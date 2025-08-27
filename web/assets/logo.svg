@@ -1,0 +1,14 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g" x1="120" y1="80" x2="392" y2="432" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#C9B885"/>
+      <stop offset="0.6" stop-color="#B08D57"/>
+      <stop offset="1" stop-color="#9C7A43"/>
+    </linearGradient>
+  </defs>
+  <circle cx="256" cy="256" r="244" fill="none" stroke="#2E3136" stroke-width="24"/>
+  <circle cx="256" cy="256" r="212" fill="url(#g)"/>
+  <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle"
+        font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif"
+        font-weight="800" font-size="164" letter-spacing="2" fill="#0D0D0D">OFY</text>
+</svg>

@@ -7,13 +7,13 @@ import 'router/app_router.dart';
 import 'theme/app_theme.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
   runApp(
     ChangeNotifierProvider(
       create: (_) => ThemeController()..load(),
       child: const PortfolioApp(),
     ),
   );
+  WidgetsFlutterBinding.ensureInitialized();
 }
 
 class PortfolioApp extends StatelessWidget {
@@ -24,7 +24,7 @@ class PortfolioApp extends StatelessWidget {
     final router = createRouter(); // buraya bak bi
     final themeMode = context.watch<ThemeController>().mode;
     return MaterialApp.router(
-      title: 'Portfolio',
+      title: 'Ömer Faruk Yılmaz - Portfolio',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,

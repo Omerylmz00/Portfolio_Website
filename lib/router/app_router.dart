@@ -2,9 +2,9 @@ import 'dart:ui' show ImageFilter;
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:portfolio_site/pages/blog_page.dart';
-import 'package:portfolio_site/pages/post_page.dart';
-import 'package:portfolio_site/pages/components_page.dart';
+import 'package:portfolio_site/pages/blog/blog_page.dart';
+import 'package:portfolio_site/pages/blog/post_page.dart';
+import 'package:portfolio_site/pages/components/components_page.dart';
 import 'package:portfolio_site/sections/home_page.dart';
 
 // sayfa geçişi için blurlu animasyon
@@ -46,7 +46,7 @@ GoRouter createRouter() {
       ),
       GoRoute(
         path: '/blog',
-        pageBuilder: (context, state) => _fadeBlurPage(const BlogPage()),
+        pageBuilder: (context, state) => _fadeBlurPage(const ComingSoonPage()),
       ),
       GoRoute(
         path: '/blog/:slug',

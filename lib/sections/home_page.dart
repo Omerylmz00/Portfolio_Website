@@ -110,41 +110,92 @@ class _TopNav extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(64);
 
   @override
+  @override
   Widget build(BuildContext context) {
     final t = Theme.of(context);
+    final isCompact = MediaQuery.sizeOf(context).width < 820;
+
     return AppBar(
       title: Text(
-        'OmerFarukYilmaz.dev',
-        style: (t.textTheme.titleLarge ?? TextStyle(fontSize: 20)).copyWith(
-          fontWeight: FontWeight.w700,
-        ),
+        'Ömer Faruk Yılmaz',
+        style: (t.textTheme.titleLarge ?? const TextStyle(fontSize: 20))
+            .copyWith(fontWeight: FontWeight.w700),
       ),
-      actions: [
-        TextButton(onPressed: onHero, child: const Text('Anasayfa')),
-        TextButton(onPressed: onProjects, child: const Text('Projeler')),
-        TextButton(onPressed: onAbout, child: const Text('Hakkımda')),
-        TextButton(onPressed: onContact, child: const Text('İletişim')),
-        IconButton(
-          tooltip: 'Theme',
-          onPressed: () => context.read<ThemeController>().toggle(),
-          icon: Icon(
-            Theme.of(context).brightness == Brightness.dark
-                ? Icons.wb_sunny
-                : Icons.dark_mode,
-          ),
-        ),
-        const SizedBox(width: 12),
-        FilledButton.tonal(
-          onPressed: () => context.go('/blog'),
-          child: const Text('Blog'),
-        ),
-        const SizedBox(width: 8),
-        OutlinedButton(
-          onPressed: () => context.go('/components'),
-          child: const Text('Components'),
-        ),
-        const SizedBox(width: 16),
-      ],
+      actions: isCompact ? _compactActions(context) : _fullActions(context),
     );
   }
+
+  List<Widget> _fullActions(BuildContext context) => [
+    TextButton(onPressed: onHero, child: const Text('Anasayfa')),
+    TextButton(onPressed: onProjects, child: const Text('Projeler')),
+    TextButton(onPressed: onAbout, child: const Text('Hakkımda')),
+    TextButton(onPressed: onContact, child: const Text('İletişim')),
+    IconButton(
+      tooltip: 'Theme',
+      onPressed: () => context.read<ThemeController>().toggle(),
+      icon: Icon(
+        Theme.of(context).brightness == Brightness.dark
+            ? Icons.wb_sunny
+            : Icons.dark_mode,
+      ),
+    ),
+    const SizedBox(width: 8),
+    FilledButton.tonal(
+      onPressed: () => context.go('/blog'),
+      child: const Text('Blog'),
+    ),
+    const SizedBox(width: 8),
+    OutlinedButton(
+      onPressed: () => context.go('/components'),
+      child: const Text('Components'),
+    ),
+    const SizedBox(width: 12),
+  ];
+
+  List<Widget> _compactActions(BuildContext context) => [
+    IconButton(
+      tooltip: 'Theme',
+      onPressed: () => context.read<ThemeController>().toggle(),
+      icon: Icon(
+        Theme.of(context).brightness == Brightness.dark
+            ? Icons.wb_sunny
+            : Icons.dark_mode,
+      ),
+    ),
+    PopupMenuButton<int>(
+      tooltip: 'Menü',
+      onSelected: (v) {
+        switch (v) {
+          case 1:
+            onHero();
+            break;
+          case 2:
+            onProjects();
+            break;
+          case 3:
+            onAbout();
+            break;
+          case 4:
+            onContact();
+            break;
+          case 5:
+            context.go('/blog');
+            break;
+          case 6:
+            context.go('/components');
+            break;
+        }
+      },
+      itemBuilder: (_) => const [
+        PopupMenuItem(value: 1, child: Text('Anasayfa')),
+        PopupMenuItem(value: 2, child: Text('Projeler')),
+        PopupMenuItem(value: 3, child: Text('Hakkımda')),
+        PopupMenuItem(value: 4, child: Text('İletişim')),
+        PopupMenuDivider(),
+        PopupMenuItem(value: 5, child: Text('Blog')),
+        PopupMenuItem(value: 6, child: Text('Components')),
+      ],
+    ),
+    const SizedBox(width: 6),
+  ];
 }

@@ -19,7 +19,10 @@ class PrimaryButton extends StatelessWidget {
       return OutlinedButton(
         onPressed: onPressed,
         style: OutlinedButton.styleFrom(
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           side: BorderSide(color: t.colorScheme.primary),
+          visualDensity: VisualDensity.compact,
+          minimumSize: const Size(0, 0),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(14),
           ),

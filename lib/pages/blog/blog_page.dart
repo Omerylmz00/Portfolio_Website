@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../data/post_repository.dart';
-import '../data/post.dart';
+
+import '../../data/post.dart';
+import '../../data/post_repository.dart';
 
 class BlogPage extends StatefulWidget {
   const BlogPage({super.key});
@@ -43,18 +44,39 @@ class _BlogPageState extends State<BlogPage> {
             separatorBuilder: (_, __) => const SizedBox(height: 14),
             itemBuilder: (_, i) {
               final p = posts[i];
-              final date = '${p.date.year}.${p.date.month.toString().padLeft(2,'0')}.${p.date.day.toString().padLeft(2,'0')}';
+              final date =
+                  '${p.date.year}.${p.date.month.toString().padLeft(2, '0')}.${p.date.day.toString().padLeft(2, '0')}';
               return ListTile(
-                title: Text(p.title, style: t.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w700)),
+                title: Text(
+                  p.title,
+                  style: t.textTheme.titleLarge?.copyWith(
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
                 subtitle: Text(p.summary),
                 trailing: Text(date),
                 onTap: () => context.go('/blog/${p.slug}'),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14),
+                ),
               );
             },
           );
         },
       ),
+    );
+  }
+}
+
+//henüz blog sayfamız hazır değil o yüzden geçici olarak bu sayfayı gösteriyoruz
+class ComingSoonPage extends StatelessWidget {
+  const ComingSoonPage({super.key});
+  @override
+  Widget build(BuildContext context) {
+    final t = Theme.of(context);
+    return Scaffold(
+      appBar: AppBar(),
+      body: Center(child: Text('Yakında!', style: t.textTheme.displaySmall)),
     );
   }
 }

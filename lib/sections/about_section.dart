@@ -27,8 +27,9 @@ class AboutSection extends StatelessWidget {
             const SizedBox(height: 12),
             AppearOnScroll(
               child: Text(
-                "Merhaba, ben Ömer Faruk Yılmaz. Süleyman Demirel Üniversitesi'nde 4. sınıf öğrencisiyim.\n"
-                "Amacım kullanıcı odaklı ürünler geliştirmek ve bildiklerimi toplulukla paylaşmak.",
+                "Merhaba, ben Ömer Faruk Yılmaz. Süleyman Demirel Üniversitesi'nde 4. sınıf öğrencisiyim. Isparta'da yaşıyor ve Isparta'da eğitim görüyorum."
+                "Yazılım kariyerime üniversitedeyken başladım ve özellikle mobil uygulama geliştirme alanında uzmanlaştım. Flutter ile uygulamalar geliştiriyorum ve Dart diline hakimim. "
+                "Amacım kullanıcı odaklı ürünler geliştirmek ve bildiklerimi bu websitesinde paylaşmak.",
                 style: t.textTheme.bodyLarge,
               ),
             ),
@@ -75,6 +76,7 @@ class AboutSection extends StatelessWidget {
 
             if (!isNarrow)
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: const [
                   Expanded(
                     child: _HighlightCard(
@@ -85,7 +87,7 @@ class AboutSection extends StatelessWidget {
                   SizedBox(width: 16),
                   Expanded(
                     child: _HighlightCard(
-                      title: 'AI/ML ilgisi',
+                      title: 'AI/ML',
                       subtitle: 'Küçük demo ve makaleler',
                     ),
                   ),
@@ -100,6 +102,7 @@ class AboutSection extends StatelessWidget {
               )
             else
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: const [
                   _HighlightCard(
                     title: '3+ Proje',
@@ -107,7 +110,7 @@ class AboutSection extends StatelessWidget {
                   ),
                   SizedBox(height: 12),
                   _HighlightCard(
-                    title: 'AI/ML ilgisi',
+                    title: 'AI/ML',
                     subtitle: 'Küçük demo ve makaleler',
                   ),
                   SizedBox(height: 12),

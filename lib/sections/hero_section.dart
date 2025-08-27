@@ -24,7 +24,7 @@ class HeroSection extends StatelessWidget {
       duration: const Duration(milliseconds: 600),
       curve: Curves.easeInOut,
 
-      height: 520,
+      constraints: BoxConstraints(minHeight: 520),
       decoration: BoxDecoration(
         gradient: AppGradients.heroFor(
           isDark ? Brightness.dark : Brightness.light,
@@ -34,85 +34,165 @@ class HeroSection extends StatelessWidget {
         children: [
           Responsive(
             builder: (context, width) {
-              return SizedBox(
-                height: 520,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: AppearOnScroll(
-                        offsetY: 70,
-                        duration: const Duration(milliseconds: 4000),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Merhaba, ben Ömer Faruk Yılmaz",
-                              style: t.textTheme.displaySmall?.copyWith(
-                                fontWeight: FontWeight.w800,
-                              ),
-                            ),
-                            const SizedBox(height: 10),
-                            Text(
-                              "Flutter • Swift • Backend • AI/ML ile ürün geliştiren bir yazılım geliştirici adayıyım.\n"
-                              "Bu sitede projelerimi, yazılarımı ve Flutter component’larımı bulabilirsin.",
-                              style: t.textTheme.titleMedium,
-                            ),
-                            const SizedBox(height: 22),
-                            Row(
+              //final isVeryNarrow = width < 420;
+              final isNarrow = width < 760;
+              final double avatarSize = width < 380
+                  ? 140
+                  : (width < 900 ? 180 : 300);
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 24),
+                child: isNarrow
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          AppearOnScroll(
+                            offsetY: 70,
+                            duration: const Duration(milliseconds: 4000),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                PrimaryButton(
-                                  label: 'Projelerime Göz At',
-                                  onPressed: () {
-                                    // Scroll'u home_page.dart içinden tetikliyoruz, burada sadece örnek:
-                                    // idealde bir callback gelirdi; MVP'de CTA kullanıcıyı en üste bırakıyor.
-                                    Scrollable.ensureVisible(
-                                      context,
-                                      duration: const Duration(
-                                        milliseconds: 300,
-                                      ),
-                                    );
-                                  },
+                                Text(
+                                  "Merhaba, ben Ömer Faruk Yılmaz",
+                                  style: t.textTheme.displaySmall?.copyWith(
+                                    fontWeight: FontWeight.w800,
+                                  ),
                                 ),
-                                const SizedBox(width: 12),
-                                PrimaryButton(
-                                  outlined: true,
-                                  label: 'CV’yi Görüntüle',
-                                  onPressed: () async {
-                                    final uri = Uri.parse(cvViewUrl);
-                                    final ok = await launchUrl(
-                                      uri,
-                                      mode: LaunchMode.externalApplication,
-                                      webOnlyWindowName:
-                                          '_blank', // web’de yeni sekme
-                                    );
-                                    if (!ok && context.mounted) {
-                                      ScaffoldMessenger.of(
-                                        context,
-                                      ).showSnackBar(
-                                        const SnackBar(
-                                          content: Text('CV açılamadı.'),
-                                        ),
-                                      );
-                                    }
-                                  },
+                                const SizedBox(height: 10),
+                                Text(
+                                  "Flutter • Swift • Backend • AI/ML ile ürün geliştiren bir yazılım geliştirici adayıyım.\n"
+                                  "Bu sitede projelerimi, yazılarımı ve Flutter component’larımı bulabilirsin.",
+                                  style: t.textTheme.titleMedium,
+                                ),
+                                const SizedBox(height: 22),
+
+                                // ✅ BUTONLAR: Row yerine Wrap
+                                Wrap(
+                                  spacing: 12,
+                                  runSpacing: 10,
+                                  children: [
+                                    PrimaryButton(
+                                      label: 'İletişime Geç',
+                                      onPressed: () {
+                                        Scrollable.ensureVisible(
+                                          context,
+                                          duration: const Duration(
+                                            milliseconds: 300,
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                    PrimaryButton(
+                                      outlined: true,
+                                      label: 'CV’yi Görüntüle',
+                                      onPressed: () async {
+                                        final uri = Uri.parse(cvViewUrl);
+                                        final ok = await launchUrl(
+                                          uri,
+                                          mode: LaunchMode.externalApplication,
+                                          webOnlyWindowName: '_blank',
+                                        );
+                                        if (!ok && context.mounted) {
+                                          ScaffoldMessenger.of(
+                                            context,
+                                          ).showSnackBar(
+                                            const SnackBar(
+                                              content: Text('CV açılamadı.'),
+                                            ),
+                                          );
+                                        }
+                                      },
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
-                          ],
-                        ),
+                          ),
+                          const SizedBox(height: 20),
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: AnimatedCircleAvatar(
+                              image: const AssetImage(
+                                'assets/images/me_2.jpeg',
+                              ),
+                              size: avatarSize,
+                            ),
+                          ),
+                        ],
+                      )
+                    : Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: AppearOnScroll(
+                              offsetY: 70,
+                              duration: const Duration(milliseconds: 4000),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Merhaba, ben Ömer Faruk Yılmaz",
+                                    style: t.textTheme.displaySmall?.copyWith(
+                                      fontWeight: FontWeight.w800,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    "Flutter • Swift • Backend • AI/ML ile ürün geliştiren bir yazılım geliştirici adayıyım.\n"
+                                    "Bu sitede projelerimi, yazılarımı ve Flutter component’larımı bulabilirsin.",
+                                    style: t.textTheme.titleMedium,
+                                  ),
+                                  const SizedBox(height: 22),
+
+                                  Wrap(
+                                    spacing: 12,
+                                    runSpacing: 10,
+                                    children: [
+                                      PrimaryButton(
+                                        label: 'İletişime Geç',
+                                        onPressed: () {
+                                          Scrollable.ensureVisible(
+                                            context,
+                                            duration: const Duration(
+                                              milliseconds: 300,
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                      PrimaryButton(
+                                        outlined: true,
+                                        label: 'CV’yi Görüntüle',
+                                        onPressed: () async {
+                                          final uri = Uri.parse(cvViewUrl);
+                                          final ok = await launchUrl(
+                                            uri,
+                                            mode:
+                                                LaunchMode.externalApplication,
+                                            webOnlyWindowName: '_blank',
+                                          );
+                                          if (!ok && context.mounted) {
+                                            ScaffoldMessenger.of(
+                                              context,
+                                            ).showSnackBar(
+                                              const SnackBar(
+                                                content: Text('CV açılamadı.'),
+                                              ),
+                                            );
+                                          }
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 24),
+                          AnimatedCircleAvatar(
+                            image: const AssetImage('assets/images/me_2.jpeg'),
+                            size: avatarSize,
+                          ),
+                        ],
                       ),
-                    ),
-                    const SizedBox(width: 24),
-                    AnimatedCircleAvatar(
-                      image: const AssetImage(
-                        'assets/images/me.jpeg',
-                      ), // görsel yolunu kendine göre ayarla
-                      size: width < 900 ? 180 : 300, // responsive boyut
-                    ),
-                  ],
-                ),
               );
             },
           ),
