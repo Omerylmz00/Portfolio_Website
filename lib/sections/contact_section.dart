@@ -16,19 +16,13 @@ class ContactSection extends StatelessWidget {
       builder: (context, width) {
         return AppearOnScroll(
           child: Center(
-            // içerik ortalansın
             child: ConstrainedBox(
-              constraints: const BoxConstraints(
-                maxWidth: 880,
-              ), // hoş bir satır genişliği
+              constraints: const BoxConstraints(maxWidth: 880),
               child: Padding(
-                padding: const EdgeInsets.only(
-                  top: 36,
-                ), // başlığı biraz aşağı çek
+                padding: const EdgeInsets.only(top: 36),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment:
-                      CrossAxisAlignment.center, // başlık + butonlar ortalı
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
                       'İletişim',
@@ -39,7 +33,6 @@ class ContactSection extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
 
-                    // (opsiyonel) kısa açıklama
                     Text(
                       "Birlikte çalışalım mı?\n"
                       "Aşağıdaki linklerden bana ulaşabilir, görüşme planlayabilirsiniz.",
@@ -50,16 +43,15 @@ class ContactSection extends StatelessWidget {
                     ),
                     const SizedBox(height: 12),
                     Wrap(
-                      alignment: WrapAlignment.center, // yatayda ortala
-                      runAlignment:
-                          WrapAlignment.center, // çok satıra düşerse de ortala
+                      alignment: WrapAlignment.center,
+                      runAlignment: WrapAlignment.center,
                       spacing: 12,
-                      runSpacing: 12, // satırlar arası dikey boşluk
+                      runSpacing: 12,
                       children: [
                         _LinkButton(
                           icon: Icons.email,
                           label: 'E-posta',
-                          // konu/ön yazı ile doldurulmuş mailto
+
                           onTap: () => _open(
                             'mailto:omrf.ylmz00@gmail.com'
                             '?subject=Merhaba%20%C3%96mer%20Faruk'
@@ -138,13 +130,12 @@ class _LinkButtonState extends State<_LinkButton> {
         duration: const Duration(milliseconds: 160),
         curve: Curves.easeOut,
 
-        // ✨ BOYUT SABİT: padding ve stroke hep aynı
         padding: const EdgeInsets.all(2.0),
         constraints: const BoxConstraints(minHeight: 44, minWidth: 120),
 
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(_radius + 2),
-          // Hover’da SADECE görünüm değişiyor, boyut değil
+
           gradient: _hovering
               ? const LinearGradient(
                   begin: Alignment.topLeft,
@@ -180,7 +171,6 @@ class _LinkButtonState extends State<_LinkButton> {
             borderRadius: BorderRadius.circular(_radius),
             onTap: widget.onTap,
             child: Padding(
-              // İç boşluk sabit kalsın
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
               child: Row(
                 mainAxisSize: MainAxisSize.min,

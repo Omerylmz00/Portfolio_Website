@@ -21,7 +21,7 @@ class PortfolioApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final router = createRouter(); // buraya bak bi
+    final router = createRouter();
     final themeMode = context.watch<ThemeController>().mode;
     return MaterialApp.router(
       title: 'Ömer Faruk Yılmaz - Portfolio',

@@ -32,98 +32,22 @@ class HeroSection extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          Responsive(
-            builder: (context, width) {
-              //final isVeryNarrow = width < 420;
-              final isNarrow = width < 760;
-              final double avatarSize = width < 380
-                  ? 140
-                  : (width < 900 ? 180 : 300);
-              return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 24),
-                child: isNarrow
-                    ? Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          AppearOnScroll(
-                            offsetY: 70,
-                            duration: const Duration(milliseconds: 4000),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Merhaba, ben Ömer Faruk Yılmaz",
-                                  style: t.textTheme.displaySmall?.copyWith(
-                                    fontWeight: FontWeight.w800,
-                                  ),
-                                ),
-                                const SizedBox(height: 10),
-                                Text(
-                                  "Flutter • Swift • Backend • AI/ML ile ürün geliştiren bir yazılım geliştirici adayıyım.\n"
-                                  "Bu sitede projelerimi, yazılarımı ve Flutter component’larımı bulabilirsin.",
-                                  style: t.textTheme.titleMedium,
-                                ),
-                                const SizedBox(height: 22),
-
-                                // ✅ BUTONLAR: Row yerine Wrap
-                                Wrap(
-                                  spacing: 12,
-                                  runSpacing: 10,
-                                  children: [
-                                    PrimaryButton(
-                                      label: 'İletişime Geç',
-                                      onPressed: () {
-                                        Scrollable.ensureVisible(
-                                          context,
-                                          duration: const Duration(
-                                            milliseconds: 300,
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                    PrimaryButton(
-                                      outlined: true,
-                                      label: 'CV’yi Görüntüle',
-                                      onPressed: () async {
-                                        final uri = Uri.parse(cvViewUrl);
-                                        final ok = await launchUrl(
-                                          uri,
-                                          mode: LaunchMode.externalApplication,
-                                          webOnlyWindowName: '_blank',
-                                        );
-                                        if (!ok && context.mounted) {
-                                          ScaffoldMessenger.of(
-                                            context,
-                                          ).showSnackBar(
-                                            const SnackBar(
-                                              content: Text('CV açılamadı.'),
-                                            ),
-                                          );
-                                        }
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: 20),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: AnimatedCircleAvatar(
-                              image: const AssetImage(
-                                'assets/images/me_2.jpeg',
-                              ),
-                              size: avatarSize,
-                            ),
-                          ),
-                        ],
-                      )
-                    : Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: AppearOnScroll(
+          Align(
+            alignment: const Alignment(0, .12),
+            child: Responsive(
+              builder: (context, width) {
+                //final isVeryNarrow = width < 420;
+                final isNarrow = width < 760;
+                final double avatarSize = width < 380
+                    ? 140
+                    : (width < 900 ? 180 : 300);
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 24),
+                  child: isNarrow
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            AppearOnScroll(
                               offsetY: 70,
                               duration: const Duration(milliseconds: 4000),
                               child: Column(
@@ -137,7 +61,7 @@ class HeroSection extends StatelessWidget {
                                   ),
                                   const SizedBox(height: 10),
                                   Text(
-                                    "Flutter • Swift • Backend • AI/ML ile ürün geliştiren bir yazılım geliştirici adayıyım.\n"
+                                    "Flutter • Swift • Backend • AI/ML ile ürün geliştiren bir bilgisayar mühendisi adayıyım.\n"
                                     "Bu sitede projelerimi, yazılarımı ve Flutter component’larımı bulabilirsin.",
                                     style: t.textTheme.titleMedium,
                                   ),
@@ -185,16 +109,99 @@ class HeroSection extends StatelessWidget {
                                 ],
                               ),
                             ),
-                          ),
-                          const SizedBox(width: 24),
-                          AnimatedCircleAvatar(
-                            image: const AssetImage('assets/images/me_2.jpeg'),
-                            size: avatarSize,
-                          ),
-                        ],
-                      ),
-              );
-            },
+                            const SizedBox(height: 20),
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: AnimatedCircleAvatar(
+                                image: const AssetImage(
+                                  'assets/images/me_2.jpeg',
+                                ),
+                                size: avatarSize,
+                              ),
+                            ),
+                          ],
+                        )
+                      : Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: AppearOnScroll(
+                                offsetY: 70,
+                                duration: const Duration(milliseconds: 4000),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Merhaba, ben Ömer Faruk Yılmaz",
+                                      style: t.textTheme.displaySmall?.copyWith(
+                                        fontWeight: FontWeight.w800,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 10),
+                                    Text(
+                                      "Flutter • Swift • Backend • AI/ML ile ürün geliştiren bir bilgisayar mühendisi adayıyım.\n"
+                                      "Bu sitede projelerimi, yazılarımı ve Flutter component’larımı bulabilirsin.",
+                                      style: t.textTheme.titleMedium,
+                                    ),
+                                    const SizedBox(height: 22),
+
+                                    Wrap(
+                                      spacing: 12,
+                                      runSpacing: 10,
+                                      children: [
+                                        PrimaryButton(
+                                          label: 'İletişime Geç',
+                                          onPressed: () {
+                                            Scrollable.ensureVisible(
+                                              context,
+                                              duration: const Duration(
+                                                milliseconds: 300,
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                        PrimaryButton(
+                                          outlined: true,
+                                          label: 'CV’yi Görüntüle',
+                                          onPressed: () async {
+                                            final uri = Uri.parse(cvViewUrl);
+                                            final ok = await launchUrl(
+                                              uri,
+                                              mode: LaunchMode
+                                                  .externalApplication,
+                                              webOnlyWindowName: '_blank',
+                                            );
+                                            if (!ok && context.mounted) {
+                                              ScaffoldMessenger.of(
+                                                context,
+                                              ).showSnackBar(
+                                                const SnackBar(
+                                                  content: Text(
+                                                    'CV açılamadı.',
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 24),
+                            AnimatedCircleAvatar(
+                              image: const AssetImage(
+                                'assets/images/me_2.jpeg',
+                              ),
+                              size: avatarSize,
+                            ),
+                          ],
+                        ),
+                );
+              },
+            ),
           ),
         ],
       ),

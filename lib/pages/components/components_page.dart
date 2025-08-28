@@ -72,7 +72,7 @@ class _ComponentsPageState extends State<ComponentsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final t = Theme.of(context);
+    //final t = Theme.of(context);
     final w = MediaQuery.of(context).size.width;
     final cross = w >= 1200
         ? 3

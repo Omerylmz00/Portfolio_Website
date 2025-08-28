@@ -1,0 +1,49 @@
+name: Deploy Flutter Web to GitHub Pages
+
+on:
+  push:
+    branches: [main] # -> repo'nun default branch'ı "master" ise burayı master yap
+  workflow_dispatch: # elle tetikleme için
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # gh-pages'a push için
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Pub get
+        run: flutter pub get
+
+      # ÖNEMLİ: Repo adı "Portfolio_Website" olduğu için base-href ayarlanıyor.
+      # index.html içinde <base href="$FLUTTER_BASE_HREF"> varsa Flutter bunu build'de doldurur.
+      - name: Build web (release)
+        run: flutter build web --release --base-href /Portfolio_Website/
+
+      - name: Create 404.html SPA fallback
+        run: cp build/web/index.html build/web/404.html
+      # (Opsiyonel) Custom domain kullanacaksan repo "Settings → Pages" altına yazacağın
+      # domaini GitHub vars (Repository → Settings → Secrets and variables → Actions → Variables)
+      # kısmında CUSTOM_DOMAIN olarak ekle; CNAME dosyası otomatik yazılsın.
+      - name: Add CNAME if custom domain is set
+        if: ${{ vars.CUSTOM_DOMAIN != '' }}
+        run: echo "${{ vars.CUSTOM_DOMAIN }}" > build/web/CNAME
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: build/web
+          force_orphan: true
