@@ -1,0 +1,24 @@
+[
+  {
+    "slug": "hello-world",
+    "title": "Hello, World!",
+    "summary": "Kişisel siteme hoş geldin — hedefler ve yol haritası.",
+    "date": "2025-08-24",
+    "tags": [
+      "personal",
+      "roadmap"
+    ],
+    "file": "assets/posts/hello-world.md"
+  },
+  {
+    "slug": "flutter-tips",
+    "title": "Flutter Web: Küçük İpuçları",
+    "summary": "Router geçişleri, gradient, hover ve performans notları.",
+    "date": "2025-08-24",
+    "tags": [
+      "flutter",
+      "web"
+    ],
+    "file": "assets/posts/flutter-tips.md"
+  }
+]
